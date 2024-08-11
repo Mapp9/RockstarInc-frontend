@@ -12,7 +12,7 @@ export class UserStorageService {
 
   public saveToken(token: string): void{
     window.localStorage.removeItem(TOKEN);
-    window.localStorage.setItem(USER, token);
+    window.localStorage.setItem(TOKEN, token);
   }
 
   public saveUser(user): void{
@@ -29,10 +29,10 @@ export class UserStorageService {
 
   static getUserId(): string {
     const user = this.getUser();
-    if(user == null){
-      return '';
+    if( user == null ){
+    return '';
     }
-    return user.userId;
+    return user.id;
   }
 
   static getUserRole(): string {
@@ -44,14 +44,14 @@ export class UserStorageService {
   }
 
   static isAdminLoggedIn(): boolean {
-    if(this.getToken === null){
+    if(this.getToken() === null){
       return false;
     }
     const role: string = this.getUserRole();
     return role == 'ADMIN';
   }
   static isCustomerLoggedIn(): boolean {
-    if(this.getToken === null){
+    if(this.getToken() === null){
       return false;
     }
     const role: string = this.getUserRole();

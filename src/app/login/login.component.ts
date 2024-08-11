@@ -42,11 +42,11 @@ export class LoginComponent {
     this.authService.login(username,password).subscribe(
       (res) =>{
         if (UserStorageService.isAdminLoggedIn()){
-          this.router.navigateByUrl('admin/dashboard');
-        }else if(UserStorageService.isCustomerLoggedIn()){
-          this.router.navigateByUrl('customer/dashboard');
-        }
-      },
+          this.router.navigateByUrl('/admin/dashboard');
+      }else if(UserStorageService.isCustomerLoggedIn()){
+        this.router.navigateByUrl('/customer/dashboard');
+      }
+    },
       (error) =>{
         this.snackBar.open('Bad credentials', 'ERROR', {duration: 5000});
       }

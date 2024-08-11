@@ -43,15 +43,18 @@ export class SignupComponent {
       return;
     }
 
-    this.authService.register(this.signupForm.value).subscribe(
-      (response) =>{
+    this.authService.register(this.signupForm.value).subscribe({
+      next: (response) =>{
         this.snackBar.open('Sign up succesfull', 'Close', { duration: 5000});
         this.router.navigateByUrl("/login");
       },
-      (error)=>{
+      error: (error)=>{
         this.snackBar.open('Sign up failed. Please try again.', 'Close', { duration: 5000, panelClass: 'error-snackbar' });
+      },
+      complete: () => {
+        console.info('Sign up completed');
       }
-    )
+  });
   }
 
   
